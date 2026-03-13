@@ -1,0 +1,26 @@
+/*
+ * @lc app=leetcode.cn id=1043 lang=java
+ *
+ * [1043] 分隔数组以得到最大和
+ */
+
+// @lc code=start
+class Solution {
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int n = arr.length;
+        int[] dp = new int[n + 1];
+        
+        for (int i = 1; i <= n; i++) {
+            int maxVal = 0;
+            for (int len = 1; len <= k && i - len >= 0; len++) {
+                maxVal = Math.max(maxVal, arr[i - len]);
+                dp[i] = Math.max(dp[i], dp[i - len] + maxVal * len);
+            }
+        }
+        
+        return dp[n];
+    }
+}
+
+// @lc code=end
+
